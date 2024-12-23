@@ -1,1 +1,47 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Code Lookup</title>
+    <script>
+        async function fetchErrorCode() {
+            const params = new URLSearchParams(window.location.search);
+            const errorCode = params.get('error-code');
+
+            if (!errorCode) {
+                document.getElementById('output').innerText = 'Missing "error-code" parameter in the URL.';
+                return;
+            }
+
+            try {
+                const response = await fetch('https://1tsnakers.github.io/error-codes/all.json');
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch error codes: ${response.statusText}`);
+                }
+
+                const errorCodes = await response.json();
+                const errorDetails = errorCodes[errorCode];
+
+                if (errorDetails) {
+                    document.getElementById('output').innerText = JSON.stringify({
+                        "error-code": errorCode,
+                        "details": errorDetails
+                    }, null, 2);
+                } else {
+                    document.getElementById('output').innerText = 'Error code not found.';
+                }
+            } catch (error) {
+                document.getElementById('output').innerText = `Error: ${error.message}`;
+            }
+        }
+
+        window.onload = fetchErrorCode;
+    </script>
+</head>
+<body>
+    <h1>Error Code Lookup</h1>
+    <pre id="output">Loading...</pre>
+</body>
+</html>
