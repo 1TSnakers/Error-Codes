@@ -65,10 +65,10 @@
     "511": "Network Authentication Required"
   },
   "categories": {
-    "1xx": "Informational Responses",
-    "2xx": "Successful Responses",
-    "3xx": "Redirection Messages",
-    "4xx": "Client Errors",
-    "5xx": "Server Errors"
+    "1xx": "Informational Response",
+    "2xx": "Successful Response",
+    "3xx": "Redirection Message",
+    "4xx": "Client Error",
+    "5xx": "Server Error"
   }
 }
