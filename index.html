@@ -21,8 +21,8 @@
                     throw new Error(`Failed to fetch error codes: ${response.statusText}`);
                 }
 
-                const errorCodes = await response.json();
-                const errorDetails = errorCodes[errorCode];
+                const data = await response.json();
+                const errorDetails = data["error-codes"][errorCode];
 
                 if (errorDetails) {
                     document.getElementById('output').innerText = JSON.stringify({
